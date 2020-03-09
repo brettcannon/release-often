@@ -35,4 +35,18 @@ The following build tools are supported for version management:
 - Provide a way to manually specify file path and regex?
 
 ### Update the changelog
+The first line of the commit message is used as the entry in the changelog for the change. The PR and the author of the change are mentioned as part of the changelog entry.
+
+Supported changelog formats are:
+- None
+
+#### TODO
+- Changelog file formats:
+  1. `.md`
+  1. `.rst`
+- Allow specifying the format of the changelog entry.
+- Specify the path to the changelog?
+- Support a static header?
+- Allow [specifying emoji](https://cjolowicz.github.io/posts/hypermodern-python-06-ci-cd/#documenting-releases-with-release-drafter) to visually signal signficance of the change?
+
 ### Commit the changes
