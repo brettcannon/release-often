@@ -13,6 +13,9 @@ Do note that this action is not designed to work for all projects. There are leg
 5. Upload to PyPI
 6. Create a release on GitHub
 
+## Caveats
+Due to the fact that the action commits back to the repository you cannot have required status checks on PRs as that prevents direct commits from non-admins.
+
 ## Details
 ### Update version
 Based on which of the following labels are applied to a PR, update the version number:
