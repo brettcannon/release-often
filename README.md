@@ -36,7 +36,7 @@ Supported build tools:
   1. flit
   1. setuptools via `setup.cfg`?
   1. setuptools via `setup.py`?
-- Provide a way to manually specify file path and regex?
+- Require people to specify the build tool?
 
 ### Update the changelog
 The first line of the commit message is used as the entry in the changelog for the change. The PR and the author of the change are mentioned as part of the changelog entry.
@@ -56,6 +56,7 @@ Automatically detected changelog file paths are:
   1. `doc/CHANGELOG`
   1. `CHANGES`
   1. `doc/CHANGES`
+- Require people specify the file path to the changelog?
 - Allow specifying the format of the changelog entry?
 - Specify the path to the changelog?
 - Support a static header?
@@ -76,9 +77,10 @@ With the checkout and repository in the appropriate state for release, the code 
   1. flit
   1. setuptools via `setup.cfg`?
   1. setuptools via `setup.py`?
+- Use `pep517` instead?
 
 ### Create a release on GitHub
-Finally, when everything is live, create a release on GitHub to both store the artifacts uploaded to PyPI and to tag the relesae in the repository. The name of the release is the version prepended by `v` and the body of the release is the changelog entry.
+Finally, when everything is live, create a release on GitHub to both store the artifacts uploaded to PyPI and to tag the release in the repository. The name of the release is the version prepended by `v` and the body of the release is the changelog entry.
 
 #### TODO
 - [Upload release artifacts](https://developer.github.com/v3/repos/releases/#upload-a-release-asset)
