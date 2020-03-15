@@ -1,4 +1,4 @@
-# release-me
+# release-often
 A GitHub Action for releasing a Python project to PyPI after every relevant, merged PR.
 
 The purpose of this action is to make project maintenance as easy as possible for PyPI-hosted projects by removing the need to decide when to release. By releasing after every relevant PR is merged, not only is the question of whether to release gone, but the overhead of remembering how to even do a release and then preparing one is also gone. It also allows for releases to occur in situations where you may not have easy access to a checkout or machine setup to make a release (e.g. merging a PR from your phone). As well, contributors will be able to benefit from their hard work much faster than having to wait for the gathering of multiple changes together into a single release.
@@ -44,10 +44,18 @@ The first line of the commit message is used as the entry in the changelog for t
 Supported changelog formats are:
 - None
 
+Automatically detected changelog file paths are:
+- None
+
 #### TODO
 - Changelog file formats:
   1. `.md`
   1. `.rst`
+- Changelog file paths:
+  1. `CHANGELOG`
+  1. `doc/CHANGELOG`
+  1. `CHANGES`
+  1. `doc/CHANGES`
 - Allow specifying the format of the changelog entry?
 - Specify the path to the changelog?
 - Support a static header?
