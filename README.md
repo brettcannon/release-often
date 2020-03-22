@@ -26,6 +26,9 @@ Based on which of the following labels are applied to a PR, update the version n
 - `impact:post-release` to bump the `post` version
 - `impact:project` to make no change
 
+Input:
+- build tool
+
 Supported build tools:
 - None
 
@@ -36,40 +39,28 @@ Supported build tools:
   1. flit
   1. setuptools via `setup.cfg`?
   1. setuptools via `setup.py`?
-- Require people to specify the build tool?
 
 ### Update the changelog
 The first line of the commit message is used as the entry in the changelog for the change. The PR and the author of the change are mentioned as part of the changelog entry.
 
-Supported changelog formats are:
-- None
+Input:
+- Path to changelog file
 
-Automatically detected changelog file paths are:
+Supported changelog formats are:
 - None
 
 #### TODO
 - Changelog file formats:
   1. `.md`
   1. `.rst`
-- Changelog file paths:
-  1. `CHANGELOG`
-  1. `doc/CHANGELOG`
-  1. `CHANGES`
-  1. `doc/CHANGES`
-- Require people specify the file path to the changelog?
 - Allow specifying the format of the changelog entry?
-- Specify the path to the changelog?
 - Support a static header?
 - Allow [specifying emoji](https://cjolowicz.github.io/posts/hypermodern-python-06-ci-cd/#documenting-releases-with-release-drafter) to visually signal signficance of the change?
 
-### Commit the changes
-Once the above changes are made, they are committed directly to the repository.
 
-#### TODO
-- Allow for specifying the author details?
+### Build project
 
-### Upload to PyPI
-With the checkout and repository in the appropriate state for release, the code can now be built and pushed to PyPI.
+Build the project's release artifacts.
 
 #### TODO
 - Support the following build tools:
@@ -77,10 +68,25 @@ With the checkout and repository in the appropriate state for release, the code 
   1. flit
   1. setuptools via `setup.cfg`?
   1. setuptools via `setup.py`?
-- Use `pep517` instead?
+- Use `pep517` instead/only?
+
+### Commit the changes
+Once the above changes are made and the build artifacts can be successfully built, commit the changes that were made.
+
+#### TODO
+- Allow for specifying the author details?
+
+### Upload to PyPI
+With the checkout and repository in the appropriate state for release, the code can now be built and pushed to PyPI.
+
+Input:
+- PyPI token
+
+#### TODO
+- Upload via twine
 
 ### Create a release on GitHub
-Finally, when everything is live, create a release on GitHub to both store the artifacts uploaded to PyPI and to tag the release in the repository. The name of the release is the version prepended by `v` and the body of the release is the changelog entry.
+Finally, when everything is live, create a release on GitHub to both tag the release in the repository and store the artifacts uploaded to PyPI. The name of the release is the version prepended by `v` and the body of the release is the changelog entry.
 
 #### TODO
 - [Upload release artifacts](https://developer.github.com/v3/repos/releases/#upload-a-release-asset)
