@@ -1,0 +1,19 @@
+[tool.poetry]
+name = "release_often"
+version = "0.1.0"
+description = "GitHub Action for releasing a Python project to PyPI after every relevant, merged PR"
+authors = ["Brett Cannon <brett@python.org>"]
+license = "MIT"
+
+[tool.poetry.dependencies]
+python = "^3.8"
+tomlkit = "^0.5.11"
+packaging = "^20.3"
+
+[tool.poetry.dev-dependencies]
+pytest = "^5.4.1"
+black = "^19.10b0"
+
+[build-system]
+requires = ["poetry>=0.12"]
+build-backend = "poetry.masonry.api"

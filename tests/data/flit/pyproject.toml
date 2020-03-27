@@ -1,0 +1,10 @@
+[build-system]
+requires = ["flit_core >=2,<3"]
+build-backend = "flit_core.buildapi"
+
+[tool.flit.metadata]
+module = "pkg"
+author = "Brett Cannon"
+author-email = "brett@python.org"
+classifiers = ["License :: OSI Approved :: MIT License"]
+
