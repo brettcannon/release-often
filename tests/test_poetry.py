@@ -7,13 +7,8 @@ from release_often import poetry
 
 
 @pytest.fixture
-def data_path():
-    return pathlib.Path(__file__).parent / "data"
-
-
-@pytest.fixture
-def pyproject_contents(data_path):
-    path = data_path / "poetry" / "pyproject.toml"
+def pyproject_contents(poetry_example_path):
+    path = poetry_example_path / "pyproject.toml"
     return path.read_text(encoding="utf-8")
 
 
@@ -25,17 +20,14 @@ class TestVersionFilePath:
         with pytest.raises(TypeError):
             poetry.version_file_path(data_path)
 
-
     def test_missing_poetry_details(self, data_path):
         flit_path = data_path / "flit" / "top_pkg"
         with pytest.raises(ValueError):
             poetry.version_file_path(flit_path)
 
-
-    def test_success(self, data_path):
-        poetry_path = data_path / "poetry"
-        pyproject_path = poetry_path / "pyproject.toml"
-        assert poetry.version_file_path(poetry_path) == pyproject_path
+    def test_success(self, poetry_example_path):
+        pyproject_path = poetry_example_path / "pyproject.toml"
+        assert poetry.version_file_path(poetry_example_path) == pyproject_path
 
 
 class TestReadVersion:
