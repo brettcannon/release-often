@@ -30,13 +30,12 @@ Input:
 - build tool
 
 Supported build tools:
-- None
+- poetry
+- flit
 
 #### TODO
 - Make the acceptable labels configurable?
 - Support the following build tools:
-  1. Poetry
-  1. flit
   1. setuptools via `setup.cfg`?
   1. setuptools via `setup.py`?
 
