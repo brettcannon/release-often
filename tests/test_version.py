@@ -1,6 +1,6 @@
 import pytest
 
-from release_me import version
+from release_often import version
 
 
 @pytest.mark.parametrize(
