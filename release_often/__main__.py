@@ -1,3 +1,5 @@
+import sys
+
 from gidgethub import actions
 
 from . import version
@@ -6,8 +8,8 @@ from . import version
 def update_version():
     build_tool, version_file = version.find_details(actions.workspace())
     if build_tool is None:
-        # XXX
-        pass
+        actions.command("error", "build tool not detected; unable to update version")
+        sys.exit(1)
     file_contents = version_file.read_text(encoding="utf-8")
     current_version = build_tool.read_version(file_contents)
     new_version = version.bump_by_label(actions.event(), current_version)
