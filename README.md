@@ -3,9 +3,9 @@ A GitHub Action for releasing a Python project to PyPI after every relevant, mer
 
 The purpose of this action is to make project maintenance as easy as possible for PyPI-hosted projects by removing the need to decide when to release. By releasing after every relevant PR is merged, not only is the question of whether to release gone, but the overhead of remembering how to even do a release and then preparing one is also gone. It also allows for releases to occur in situations where you may not have easy access to a checkout or machine setup to make a release (e.g. merging a PR from your phone). As well, contributors will be able to benefit from their hard work much faster than having to wait for the gathering of multiple changes together into a single release.
 
-Do note that this action is not designed to work for all projects. There are legitimate reasons to want to do a release until it contains multiple changes. This action is specifically tailored towards smaller -- typically single-maintainer -- projects where PR merges are infrequent and the release process alone makes up a sizable amount of the cost of maintenance.
+Do note that this action is not designed to work for all projects. There are legitimate reasons to bundle multiple changes in a release. This action is specifically tailored towards smaller -- typically single-maintainer -- projects where PR merges are infrequent and the release process alone makes up a sizable amount of the cost of maintenance.
 
-## Steps
+## Outline
 1. Update the version number according to a label on the merged PR
 2. Update the changelog based on the commit message
 3. Commit the above updates
@@ -15,6 +15,58 @@ Do note that this action is not designed to work for all projects. There are leg
 
 ## Caveats
 Due to the fact that the action commits back to the repository you cannot have required status checks on PRs as that prevents direct commits from non-admins.
+
+## Action instructions
+### Suggested configuration
+```YAML
+release:
+  needs: [test, lint]
+  if: github.event_name == 'pull_request' && github.ref == 'refs/heads/master' && github.event.action == 'closed' && github.event.pull_request.merged
+
+  runs-on: ubuntu-latest
+
+  steps:
+  - uses: actions/checkout@v2
+  - uses: brettcannon/release-often@v1
+    with:
+      build-tool: flit
+      changelog-path: doc/CHANGELOG.rst
+      github-token: ${{ secret.GITHUB_TOKEN }}
+      pypi-token: ${{ secrets.PYPI_TOKEN }}
+```
+
+### Inputs
+#### `build-tool`
+The build tool used for the project. Acceptable values are:
+- flit
+- poetry
+
+Leaving this input out will disable automatic version bumping.
+
+#### `changelog-path`
+The path to the changelog file. Paths must end in one of the following extensions to denote the file format:
+- `.md`
+- `.rst`
+
+Leaving this input out will disable automatic changelog updating.
+
+#### `github-token`
+The GitHub access token (i.e. `${{ secrets.GITHUB_TOKEN }}`). This allows for committing changes back to the repository.
+
+Leaving this input out will disable committing any changes made and creating a release.
+
+#### `pypi-token`
+The [PyPI API token](https://pypi.org/help/#apitoken) for this project. It is **strongly** suggested that you create a token scoped to _just_ this project.
+
+Leaving this input out will disable uploading to PyPI.
+
+### Outputs
+#### `version`
+The new version of the project. Set to the empty string if a version change did not occur.
+
+#### `artifacts`
+Directory containing the built artifacts (traditionally `dist/`).
+
 
 ## Details
 ### Update version
@@ -43,23 +95,13 @@ Supported changelog formats are:
 - `.md`
 - `.rst`
 
-#### TODO
-- Allow specifying the format of the changelog entry?
-- Support a static header?
-- Allow [specifying emoji](https://cjolowicz.github.io/posts/hypermodern-python-06-ci-cd/#documenting-releases-with-release-drafter) to visually signal signficance of the change?
-
 
 ### Build project
 
 Build the project's release artifacts.
 
 #### TODO
-- Support the following build tools:
-  1. Poetry
-  1. flit
-  1. setuptools via `setup.cfg`?
-  1. setuptools via `setup.py`?
-- Use `pep517` instead/only?
+- Build sdist and wheel via [pep517](https://pypi.org/project/pep517/)
 
 ### Commit the changes
 Once the above changes are made and the build artifacts can be successfully built, commit the changes that were made.
