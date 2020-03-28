@@ -29,29 +29,22 @@ release:
   - uses: actions/checkout@v2
   - uses: brettcannon/release-often@v1
     with:
-      build-tool: flit
       changelog-path: doc/CHANGELOG.rst
       github-token: ${{ secret.GITHUB_TOKEN }}
       pypi-token: ${{ secrets.PYPI_TOKEN }}
 ```
 
 ### Inputs
-#### `build-tool`
-The build tool used for the project. Acceptable values are:
-- flit
-- poetry
-
-Leaving this input out will disable automatic version bumping.
 
 #### `changelog-path`
-The path to the changelog file. Paths must end in one of the following extensions to denote the file format:
+**Required**: The path to the changelog file. Paths must end in one of the following extensions to denote the file format:
 - `.md`
 - `.rst`
 
 Leaving this input out will disable automatic changelog updating.
 
 #### `github-token`
-The GitHub access token (i.e. `${{ secrets.GITHUB_TOKEN }}`). This allows for committing changes back to the repository.
+**Required**: The GitHub access token (i.e. `${{ secrets.GITHUB_TOKEN }}`). This allows for committing changes back to the repository.
 
 Leaving this input out will disable committing any changes made and creating a release.
 
@@ -59,13 +52,6 @@ Leaving this input out will disable committing any changes made and creating a r
 The [PyPI API token](https://pypi.org/help/#apitoken) for this project. It is **strongly** suggested that you create a token scoped to _just_ this project.
 
 Leaving this input out will disable uploading to PyPI.
-
-### Outputs
-#### `version`
-The new version of the project. Set to the empty string if a version change did not occur.
-
-#### `artifacts`
-Directory containing the built artifacts (traditionally `dist/`).
 
 
 ## Details
