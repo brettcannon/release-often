@@ -4,7 +4,7 @@ import subprocess
 import sys
 
 from gidgethub import actions
-import pep517
+import pep517.envbuild
 
 from . import changelog
 from . import version
@@ -44,10 +44,10 @@ def update_changelog(path, new_version):
 
 
 def build():
-    directory = actions.workspace()
-    output_dir = directory / "dist"
-    for builder in (pep517.build_sdist, pep517.build_wheel):
-        builder(directory, output_dir)
+    source_dir = actions.workspace()
+    output_dir = source_dir / "dist"
+    for builder in (pep517.envbuild.build_sdist, pep517.envbuild.build_wheel):
+        builder(source_dir, output_dir)
     subprocess.run(["twine", "check", f"{output_dir}/*"], check=True)
     return output_dir
 
