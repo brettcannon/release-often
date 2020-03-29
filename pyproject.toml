@@ -8,13 +8,14 @@ license = "MIT"
 [tool.poetry.dependencies]
 python = "^3.8"
 gidgethub = "^4.0"
+packaging = "^20.3"
 pep517 = "^0.8.1"
 tomlkit = "^0.5.11"
-packaging = "^20.3"
+twine = "^3.1.1"
 
 [tool.poetry.dev-dependencies]
-pytest = "^5.4.1"
 black = "^19.10b0"
+pytest = "^5.4.1"
 
 [build-system]
 requires = ["poetry>=0.12"]
