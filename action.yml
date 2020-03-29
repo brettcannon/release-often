@@ -1,0 +1,18 @@
+name: 'release-often'
+author: 'Brett Cannon'
+description: ''
+inputs:
+    changelog-path:
+        description: 'Relative path to the changelog file'
+        required: true
+    pypi-token:
+        description: 'API token for PyPI uploading'
+        required: false
+        default: '-'
+    github-token:
+        description: 'GitHub token for creating releases'
+        required: true
+runs:
+    using: 'docker'
+    image: 'Dockerfile'
+    args: ['--changelog-path', '${{ inputs.changelog-path }}']
