@@ -48,7 +48,10 @@ def build():
     output_dir = source_dir / "dist"
     for builder in (pep517.envbuild.build_sdist, pep517.envbuild.build_wheel):
         builder(source_dir, output_dir)
-    subprocess.run(["twine", "check", f"{output_dir}/*"], check=True)
+    # https://github.com/python-poetry/poetry/issues/769
+    check_result = subprocess.run(["twine", "check", f"{output_dir}/*"])
+    if check_result.returncode:
+        actions.command("warning", "`twine check` had a non-zero exit code")
     return output_dir
 
 
