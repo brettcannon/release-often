@@ -1,6 +1,6 @@
 import enum
 
-import packaging
+import packaging.version
 
 from . import flit, poetry
 

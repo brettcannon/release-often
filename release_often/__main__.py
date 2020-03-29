@@ -1,4 +1,5 @@
 import argparse
+import pathlib
 import subprocess
 import sys
 
@@ -42,7 +43,8 @@ def update_changelog(path, new_version):
     path.write_text(new_entry + current_changelog, encoding="utf-8")
 
 
-def build(directory):
+def build():
+    directory = actions.workspace()
     output_dir = directory / "dist"
     for builder in (pep517.build_sdist, pep517.build_wheel):
         builder(directory, output_dir)

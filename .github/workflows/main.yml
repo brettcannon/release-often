@@ -36,13 +36,10 @@ jobs:
 
     - run: pytest tests
 
+    - run: mypy --ignore-missing-imports release_often/
+
     - run: black --check .
 
-    - run: |
-        echo $EVENT_NAME
-        echo $REF
-        echo $ACTION
-        echo $MERGED
       env:
         EVENT_NAME: ${{ github.event_name }}
         REF: ${{ github.ref }}
