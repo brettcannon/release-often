@@ -21,17 +21,32 @@ jobs:
     steps:
     # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
     - uses: actions/checkout@v2
-    
+
     - uses: actions/setup-python@v1
       with:
         python-version: '3.8'
-        
-    - run: python -m pip install poetry
-    
-    - run: poetry config virtualenvs.create false
-    
+
+    - name: 'Install Poetry'
+      run: |
+        python -m pip install poetry
+        poetry config virtualenvs.create false
+
     - run: poetry install
-    
+
     - run: pytest tests
-    
+
     - run: black --check .
+
+  release:
+    needs: [test]
+    if: github.event_name == 'pull_request' && github.ref == 'refs/heads/master' && github.event.action == 'closed' && github.event.pull_request.merged
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v2
+
+    - uses: brettcannon/release-often@master
+      with:
+        changelog-path: CHANGES.md
+        github-token: ${{ secrets.GITHUB_TOKEN }}
