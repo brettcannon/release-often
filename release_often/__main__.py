@@ -1,4 +1,5 @@
 import argparse
+import subprocess
 import sys
 
 from gidgethub import actions
@@ -45,14 +46,26 @@ def build(directory):
     output_dir = directory / "dist"
     for builder in (pep517.build_sdist, pep517.build_wheel):
         builder(directory, output_dir)
+    subprocess.run(["twine", "check", f"{output_dir}/*"], check=True)
+    return output_dir
+
+
+def commit(new_version):
+    subprocess.run(
+        ["git", "config", "--local", "user.email", "action@github.com"], check=True
+    )
+    subprocess.run(
+        ["git", "config", "--local", "user.name", "GitHub Action"], check=True
+    )
+    subprocess.run(["git", "commit", "-a", "-m", f"Updates for v{new_version}"])
 
 
 if __name__ == "__main__":
     args = parse_args()
     new_version = update_version()
     update_changelog(pathlib.Path(args.changelog_path), new_version)
-    build()
-    # XXX Commit the changes
+    output_dir = build()
+    commit(new_version)
     # XXX Upload to PyPI
     # XXX Create a release on GitHub
     pass
