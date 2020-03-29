@@ -30,8 +30,8 @@ release:
   - uses: brettcannon/release-often@v1
     with:
       changelog-path: doc/CHANGELOG.rst
-      github-token: ${{ secret.GITHUB_TOKEN }}
       pypi-token: ${{ secrets.PYPI_TOKEN }}
+      github-token: ${{ secret.GITHUB_TOKEN }}
 ```
 
 ### Inputs
@@ -43,15 +43,15 @@ release:
 
 Leaving this input out will disable automatic changelog updating.
 
-#### `github-token`
-**Required**: The GitHub access token (i.e. `${{ secrets.GITHUB_TOKEN }}`). This allows for committing changes back to the repository.
-
-Leaving this input out will disable committing any changes made and creating a release.
-
 #### `pypi-token`
 The [PyPI API token](https://pypi.org/help/#apitoken) for this project. It is **strongly** suggested that you create a token scoped to _just_ this project.
 
 Leaving this input out will disable uploading to PyPI.
+
+#### `github-token`
+**Required**: The GitHub access token (i.e. `${{ secrets.GITHUB_TOKEN }}`). This allows for committing changes back to the repository.
+
+Leaving this input out will disable committing any changes made and creating a release.
 
 
 ## Details
