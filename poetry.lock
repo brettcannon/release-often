@@ -67,6 +67,25 @@ python-versions = ">=2.7, !=3.0.*, !=3.1.*, !=3.2.*, !=3.3.*, !=3.4.*"
 version = "0.4.3"
 
 [[package]]
+category = "main"
+description = "An async GitHub API library"
+name = "gidgethub"
+optional = false
+python-versions = ">=3.6"
+version = "4.0.0"
+
+[package.dependencies]
+uritemplate = ">=3.0.1"
+
+[package.extras]
+aiohttp = ["aiohttp"]
+dev = ["aiohttp", "black", "coverage (>=5.0.3)", "httpx", "mypy", "pytest-cov", "tornado"]
+doc = ["sphinx"]
+httpx = ["httpx (>=0.11.0)"]
+test = ["importlib-resources", "pytest (>=5.4.1)", "pytest-asyncio", "pytest-tornasync"]
+tornado = ["tornado"]
+
+[[package]]
 category = "dev"
 description = "More routines for operating on iterables, beyond itertools"
 name = "more-itertools"
@@ -93,6 +112,17 @@ name = "pathspec"
 optional = false
 python-versions = ">=2.7, !=3.0.*, !=3.1.*, !=3.2.*, !=3.3.*, !=3.4.*"
 version = "0.7.0"
+
+[[package]]
+category = "main"
+description = "Wrappers to build Python packages using PEP 517 hooks"
+name = "pep517"
+optional = false
+python-versions = "*"
+version = "0.8.1"
+
+[package.dependencies]
+toml = "*"
 
 [[package]]
 category = "dev"
@@ -160,7 +190,7 @@ python-versions = ">=2.7, !=3.0.*, !=3.1.*, !=3.2.*"
 version = "1.14.0"
 
 [[package]]
-category = "dev"
+category = "main"
 description = "Python Library for Tom's Obvious, Minimal Language"
 name = "toml"
 optional = false
@@ -184,6 +214,14 @@ python-versions = "*"
 version = "1.4.1"
 
 [[package]]
+category = "main"
+description = "URI templates"
+name = "uritemplate"
+optional = false
+python-versions = ">=2.7, !=3.0.*, !=3.1.*, !=3.2.*, !=3.3.*"
+version = "3.0.1"
+
+[[package]]
 category = "dev"
 description = "Measures number of Terminal column cells of wide-character codes"
 name = "wcwidth"
@@ -192,7 +230,7 @@ python-versions = "*"
 version = "0.1.9"
 
 [metadata]
-content-hash = "3115c0279d247483d62ad19d2eeae4cc17f2139ef556baf5c964690d14ad2b1d"
+content-hash = "0b71e503419a258a0696f3d6f12af42265721f3bd527f78d1ee363ec7430f9c2"
 python-versions = "^3.8"
 
 [metadata.files]
@@ -220,6 +258,10 @@ colorama = [
     {file = "colorama-0.4.3-py2.py3-none-any.whl", hash = "sha256:7d73d2a99753107a36ac6b455ee49046802e59d9d076ef8e47b61499fa29afff"},
     {file = "colorama-0.4.3.tar.gz", hash = "sha256:e96da0d330793e2cb9485e9ddfd918d456036c7149416295932478192f4436a1"},
 ]
+gidgethub = [
+    {file = "gidgethub-4.0.0-py3-none-any.whl", hash = "sha256:b96132da05ef059eaf6a148878f0c05a4cd720573ba5c3d2144bae7e4e7fb0f0"},
+    {file = "gidgethub-4.0.0.tar.gz", hash = "sha256:965a028f767f08743de241cf93cfaf0a99eac85c6d3219d277d51738c964ff91"},
+]
 more-itertools = [
     {file = "more-itertools-8.2.0.tar.gz", hash = "sha256:b1ddb932186d8a6ac451e1d95844b382f55e12686d51ca0c68b6f61f2ab7a507"},
     {file = "more_itertools-8.2.0-py3-none-any.whl", hash = "sha256:5dd8bcf33e5f9513ffa06d5ad33d78f31e1931ac9a18f33d37e77a180d393a7c"},
@@ -231,6 +273,10 @@ packaging = [
 pathspec = [
     {file = "pathspec-0.7.0-py2.py3-none-any.whl", hash = "sha256:163b0632d4e31cef212976cf57b43d9fd6b0bac6e67c26015d611a647d5e7424"},
     {file = "pathspec-0.7.0.tar.gz", hash = "sha256:562aa70af2e0d434367d9790ad37aed893de47f1693e4201fd1d3dca15d19b96"},
+]
+pep517 = [
+    {file = "pep517-0.8.1-py2.py3-none-any.whl", hash = "sha256:882e2eeeffe39ccd6be6122d98300df18d80950cb5f449766d64149c94c5614a"},
+    {file = "pep517-0.8.1.tar.gz", hash = "sha256:5ce351f3be71d01bb094d63253854b6139931fcaba8e2f380c02102136c51e40"},
 ]
 pluggy = [
     {file = "pluggy-0.13.1-py2.py3-none-any.whl", hash = "sha256:966c145cd83c96502c3c3868f50408687b38434af77734af1e9ca461a4081d2d"},
@@ -306,6 +352,10 @@ typed-ast = [
     {file = "typed_ast-1.4.1-cp38-cp38-win_amd64.whl", hash = "sha256:fc0fea399acb12edbf8a628ba8d2312f583bdbdb3335635db062fa98cf71fca4"},
     {file = "typed_ast-1.4.1-cp39-cp39-macosx_10_15_x86_64.whl", hash = "sha256:d43943ef777f9a1c42bf4e552ba23ac77a6351de620aa9acf64ad54933ad4d34"},
     {file = "typed_ast-1.4.1.tar.gz", hash = "sha256:8c8aaad94455178e3187ab22c8b01a3837f8ee50e09cf31f1ba129eb293ec30b"},
+]
+uritemplate = [
+    {file = "uritemplate-3.0.1-py2.py3-none-any.whl", hash = "sha256:07620c3f3f8eed1f12600845892b0e036a2420acf513c53f7de0abd911a5894f"},
+    {file = "uritemplate-3.0.1.tar.gz", hash = "sha256:5af8ad10cec94f215e3f48112de2022e1d5a37ed427fbd88652fa908f2ab7cae"},
 ]
 wcwidth = [
     {file = "wcwidth-0.1.9-py2.py3-none-any.whl", hash = "sha256:cafe2186b3c009a04067022ce1dcd79cb38d8d65ee4f4791b8888d6599d1bbe1"},

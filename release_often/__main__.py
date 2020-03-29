@@ -2,6 +2,7 @@ import argparse
 import sys
 
 from gidgethub import actions
+import pep517
 
 from . import changelog
 from . import version
@@ -40,10 +41,17 @@ def update_changelog(path, new_version):
     path.write_text(new_entry + current_changelog, encoding="utf-8")
 
 
+def build(directory):
+    output_dir = directory / "dist"
+    for builder in (pep517.build_sdist, pep517.build_wheel):
+        builder(directory, output_dir)
+
+
 if __name__ == "__main__":
     args = parse_args()
     new_version = update_version()
     update_changelog(pathlib.Path(args.changelog_path), new_version)
+    build()
     # XXX Commit the changes
     # XXX Upload to PyPI
     # XXX Create a release on GitHub

@@ -8,6 +8,7 @@ license = "MIT"
 [tool.poetry.dependencies]
 python = "^3.8"
 gidgethub = "^4.0"
+pep517 = "^0.8.1"
 tomlkit = "^0.5.11"
 packaging = "^20.3"
 
