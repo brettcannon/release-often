@@ -18,4 +18,4 @@ RUN poetry install --no-interaction --no-ansi --no-dev
 ADD release_often .
 
 # During debugging, this entry point will be overridden. For more information, refer to https://aka.ms/vscode-docker-python-debug
-CMD ["python", "-m", "release_often"]
+ENTRYPOINT ["python", "-m", "release_often"]
