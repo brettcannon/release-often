@@ -63,6 +63,9 @@ def commit(new_version):
 if __name__ == "__main__":
     args = parse_args()
     new_version = update_version()
+    if new_version is None:
+        actions.command("debug", "No version update requested")
+        sys.exit()
     update_changelog(pathlib.Path(args.changelog_path), new_version)
     output_dir = build()
     commit(new_version)
