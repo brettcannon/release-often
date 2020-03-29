@@ -48,3 +48,13 @@ def find_details(directory):
 
 def bump_by_label(event, old_version):
     """Calculate the new version based on the pull request event."""
+    for label in event["pull_request"]["labels"]:
+        label_name = label["name"]
+        try:
+            level = BumpLevel(label_name)
+        except ValueError:
+            continue
+        else:
+            return bump(old_version, level)
+    else:
+        raise ValueError("'impact' label missing")

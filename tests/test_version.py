@@ -23,8 +23,13 @@ def test_bump(given, level, expect):
     "test_path,build_tool,file_path",
     [("poetry", poetry, "pyproject.toml"), ("flit/top_module", flit, "pkg.py")],
 )
-def test_version_file_path(data_path, test_path, build_tool, file_path):
+def test_find_details(data_path, test_path, build_tool, file_path):
     directory = data_path / test_path
     result = version.find_details(directory)
     assert result[0] == build_tool
     assert result[1] == directory / file_path
+
+
+def test_bump_by_label(pr_event):
+    old_version = "1.2.3"
+    assert version.bump_by_label(pr_event, old_version) == "2.0.0"

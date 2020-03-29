@@ -7,6 +7,7 @@ from release_often import changelog
 
 file_extensions = pytest.mark.parametrize("file_extension", [".md", ".rst"])
 
+
 @file_extensions
 def test_templates(file_extension):
     template = changelog.TEMPLATES[file_extension]
@@ -24,11 +25,9 @@ def test_templates(file_extension):
 
 
 @file_extensions
-def test_entry(data_path, file_extension):
+def test_entry(pr_event, file_extension):
     version = "2.0.0"
-    json_path = data_path / "merged_PR.json"
-    event = json.loads(json_path.read_text(encoding="utf-8"))
-    entry = changelog.entry(file_extension, version, event)
+    entry = changelog.entry(file_extension, version, pr_event)
     assert version in entry
     assert "105" in entry
     assert "https://github.com/brettcannon/gidgethub/pull/105" in entry

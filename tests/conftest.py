@@ -1,3 +1,4 @@
+import json
 import pathlib
 
 import pytest
@@ -11,3 +12,9 @@ def data_path():
 @pytest.fixture
 def poetry_example_path(data_path):
     return data_path / "poetry"
+
+
+@pytest.fixture
+def pr_event(data_path):
+    path = data_path / "merged_PR.json"
+    return json.loads(path.read_text(encoding="utf-8"))

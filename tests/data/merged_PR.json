@@ -43,7 +43,14 @@
         "assignees": [],
         "requested_reviewers": [],
         "requested_teams": [],
-        "labels": [],
+        "labels": [
+            {
+                "name": "skip news"
+            },
+            {
+                "name": "impact:breaking"
+            }
+        ],
         "milestone": null,
         "draft": false,
         "commits_url": "https://api.github.com/repos/brettcannon/gidgethub/pulls/105/commits",
