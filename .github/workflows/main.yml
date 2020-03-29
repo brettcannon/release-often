@@ -52,7 +52,7 @@ jobs:
 
   release:
     needs: [test]
-    if: github.event_name == 'pull_request' && github.ref == 'refs/heads/master' && github.event.action == 'closed' && github.event.pull_request.merged
+    if: github.event_name == 'pull_request' && github.ref == 'master' && github.event.action == 'closed' && github.event.pull_request.merged
 
     runs-on: ubuntu-latest
 
