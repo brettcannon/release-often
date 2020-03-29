@@ -38,6 +38,18 @@ jobs:
 
     - run: black --check .
 
+    - run: |
+        echo $EVENT_NAME
+        echo $REF
+        echo $ACTION
+        echo $MERGED
+      env:
+        EVENT_NAME: ${{ github.event_name }}
+        REF: ${{ github.ref }}
+        ACTION: ${{ github.event.action }}
+        MERGED: ${{ github.event.pull_request.merged }}
+
+
   release:
     needs: [test]
     if: github.event_name == 'pull_request' && github.ref == 'refs/heads/master' && github.event.action == 'closed' && github.event.pull_request.merged
