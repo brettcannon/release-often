@@ -1,4 +1,5 @@
 import argparse
+import os
 import pathlib
 import subprocess
 import sys
@@ -56,13 +57,18 @@ def build():
 
 
 def commit(new_version):
+    os.chdir(actions.workspace())
     subprocess.run(
-        ["git", "config", "--local", "user.email", "action@github.com"], check=True
+        ["/usr/bin/git", "config", "--local", "user.email", "action@github.com"],
+        check=True,
     )
     subprocess.run(
-        ["git", "config", "--local", "user.name", "GitHub Action"], check=True
+        ["/usr/bin/git", "config", "--local", "user.name", "GitHub Action"], check=True
     )
-    subprocess.run(["git", "commit", "-a", "-m", f"Updates for v{new_version}"])
+    subprocess.run(
+        ["/usr/bin/git", "commit", "-a", "-m", f"Updates for v{new_version}"],
+        check=True,
+    )
 
 
 if __name__ == "__main__":

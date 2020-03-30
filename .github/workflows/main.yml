@@ -40,12 +40,6 @@ jobs:
 
     - run: black --check .
 
-      env:
-        EVENT_NAME: ${{ github.event_name }}
-        REF: ${{ github.ref }}
-        ACTION: ${{ github.event.action }}
-        MERGED: ${{ github.event.pull_request.merged }}
-
 
   release:
     needs: [test]
@@ -55,6 +49,8 @@ jobs:
 
     steps:
     - uses: actions/checkout@v2
+
+    - run: which git
 
     - uses: brettcannon/release-often@master
       with:
