@@ -7,15 +7,16 @@ ENV PYTHONDONTWRITEBYTECODE 1
 # Turns off buffering for easier container logging
 ENV PYTHONUNBUFFERED 1
 
-RUN apt install git
+RUN apt-get -qy update && apt-get -qy install git && \
+    rm -rf /var/cache/apt/* /var/lib/apt/lists/*
 
 WORKDIR /app
 
 COPY pyproject.toml .
 COPY poetry.lock .
-RUN python -m pip install poetry
+RUN python -m pip install --quiet poetry
 RUN poetry config virtualenvs.create false
-RUN poetry install --no-interaction --no-ansi --no-dev
+RUN poetry install --quiet --no-interaction --no-ansi --no-dev
 
 ADD release_often .
 
