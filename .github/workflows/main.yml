@@ -50,6 +50,8 @@ jobs:
     steps:
     - uses: actions/checkout@v2
 
+
+    - run: chmod 0666 /github/home/.cache/pip
     - run: which git
 
     - uses: brettcannon/release-often@master

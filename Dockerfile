@@ -14,8 +14,6 @@ COPY poetry.lock .
 RUN python -m pip install poetry
 RUN poetry config virtualenvs.create false
 RUN poetry install --no-interaction --no-ansi --no-dev
-# Suppress warnings from pip via  pep517 trying to cache wheels
-RUN chmod 0666 /github/home/.cache/pip
 
 ADD release_often .
 
