@@ -7,6 +7,8 @@ ENV PYTHONDONTWRITEBYTECODE 1
 # Turns off buffering for easier container logging
 ENV PYTHONUNBUFFERED 1
 
+RUN apt install git
+
 WORKDIR /app
 
 COPY pyproject.toml .

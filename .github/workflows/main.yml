@@ -50,11 +50,7 @@ jobs:
     steps:
     - uses: actions/checkout@v2
 
-    - run: which git
-
     - uses: brettcannon/release-often@master
       with:
         changelog-path: CHANGES.md
         github-token: ${{ secrets.GITHUB_TOKEN }}
-      env:
-        ACTIONS_STEP_DEBUG: "true"
