@@ -27,8 +27,9 @@ def update_version():
     if build_tool is None:
         error("build tool not detected; unable to update version")
     else:
-        actions.command("debug", f"Build tool is {build_tool.__name__}")
-        actions.command("debug", f"Version found in {version_file!r}")
+        tool_name = build_tool.__name__.rpartition(".")[-1]
+        actions.command("debug", f"Build tool is {tool_name}")
+        actions.command("debug", f"Version found in {version_file}")
     file_contents = version_file.read_text(encoding="utf-8")
     current_version = build_tool.read_version(file_contents)
     actions.command("debug", f"Current/old version is {current_version}")
@@ -43,7 +44,7 @@ def update_version():
 
 def update_changelog(path, new_version):
     if not path.exists():
-        error(f"The path to the changelog does not exist: {path!r}")
+        error(f"The path to the changelog does not exist: {path}")
     actions.command("debug", f"Changelog file path is {path}")
     new_entry = changelog.entry(path.suffix, new_version, actions.event())
     current_changelog = path.read_text(encoding="utf-8")
@@ -53,7 +54,7 @@ def update_changelog(path, new_version):
 def build():
     source_dir = actions.workspace()
     output_dir = source_dir / "dist"
-    actions.command("debug", f"Writing build artifacts to {output_dir!r}")
+    actions.command("debug", f"Writing build artifacts to {output_dir}")
     for builder in (pep517.envbuild.build_sdist, pep517.envbuild.build_wheel):
         builder(source_dir, output_dir)
     # https://github.com/python-poetry/poetry/issues/769
@@ -65,20 +66,17 @@ def build():
 
 def commit(new_version):
     os.chdir(actions.workspace())
+    subprocess.run("which git", shell=True)
     subprocess.run(
-        ["git", "config", "--local", "user.email", "action@github.com"],
+        ["/usr/bin/git", "config", "--local", "user.email", "action@github.com"],
         check=True,
-        shell=True,
     )
     subprocess.run(
-        ["git", "config", "--local", "user.name", "GitHub Action"],
-        check=True,
-        shell=True,
+        ["/usr/bin/git", "config", "--local", "user.name", "GitHub Action"], check=True,
     )
     subprocess.run(
-        ["git", "commit", "-a", "-m", f"Updates for v{new_version}"],
+        ["/usr/bin/git", "commit", "-a", "-m", f"Updates for v{new_version}"],
         check=True,
-        shell=True,
     )
 
 
