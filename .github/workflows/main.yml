@@ -56,3 +56,5 @@ jobs:
       with:
         changelog-path: CHANGES.md
         github-token: ${{ secrets.GITHUB_TOKEN }}
+      env:
+        ACTIONS_STEP_DEBUG: "true"
