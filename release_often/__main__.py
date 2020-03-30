@@ -64,20 +64,21 @@ def build():
     return output_dir
 
 
+GIT = "/usr/bin/git"
+
+
 def commit(new_version):
     os.chdir(actions.workspace())
-    subprocess.run("which git", shell=True)
     subprocess.run(
-        ["/usr/bin/git", "config", "--local", "user.email", "action@github.com"],
-        check=True,
+        [GIT, "config", "--local", "user.email", "action@github.com"], check=True,
     )
     subprocess.run(
-        ["/usr/bin/git", "config", "--local", "user.name", "GitHub Action"], check=True,
+        [GIT, "config", "--local", "user.name", "GitHub Action"], check=True,
     )
     subprocess.run(
-        ["/usr/bin/git", "commit", "-a", "-m", f"Updates for v{new_version}"],
-        check=True,
+        [GIT, "commit", "-a", "-m", f"Updates for v{new_version}"], check=True,
     )
+    subprocess.run([GIT, "push"], check=True)
 
 
 if __name__ == "__main__":
