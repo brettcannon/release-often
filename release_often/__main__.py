@@ -19,6 +19,7 @@ def error(message):
 def parse_args():
     parser = argparse.ArgumentParser()
     parser.add_argument("--changelog-path", dest="changelog_path")
+    parser.add_argument("--pypi-token", dest="pypi_token")
     return parser.parse_args()
 
 
@@ -81,15 +82,27 @@ def commit(new_version):
     subprocess.run([GIT, "push"], check=True)
 
 
+def upload(output_dir, pypi_token):
+    env = {"TWINE_USERNAME": "__token__", "TWINE_PASSWORD": pypi_token}
+    subprocess.run(
+        ["twine", "upload", "--non-interactive", f"{output_dir}/*"], check=True, env=env
+    )
+
+
 if __name__ == "__main__":
     args = parse_args()
     new_version = update_version()
     if new_version is None:
         actions.command("debug", "No version update requested")
         sys.exit()
-    update_changelog(pathlib.Path(args.changelog_path), new_version)
+    changelog_entry = update_changelog(pathlib.Path(args.changelog_path), new_version)
     output_dir = build()
     commit(new_version)
-    # XXX Upload to PyPI
+    if args.pypi_token != "-":
+        upload(output_dir, args.pypi_token)
+    else:
+        actions.command("debug", "PyPI uploading skipped; no API token provided")
     # XXX Create a release on GitHub
+    # https://developer.github.com/v3/repos/releases/
+    # release(new_version, changelog_entry, output_dir)
     pass
