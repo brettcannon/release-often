@@ -15,4 +15,4 @@ inputs:
 runs:
     using: 'docker'
     image: 'Dockerfile'
-    args: ['--changelog-path', '${{ inputs.changelog-path }}', '--pypi-token', '${{ inputs.pypi-token }}']
+    args: ['--changelog-path', '${{ inputs.changelog-path }}', '--pypi-token', '${{ inputs.pypi-token }}', '--github-token', '${{ inputs.github-token }}']

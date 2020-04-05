@@ -7,10 +7,13 @@ license = "MIT"
 
 [tool.poetry.dependencies]
 python = "^3.8"
-gidgethub = "^4.0"
+
+gidgethub = "^4.0"  # Really want 'gidgethub[httpx]', but Poetry doesn't support extras.
+httpx = ">=0.12.1"
 packaging = "^20.3"
 pep517 = "^0.8.1"
 tomlkit = "^0.5.11"
+trio = "^0.13.0"
 twine = "^3.1.1"
 
 [tool.poetry.dev-dependencies]

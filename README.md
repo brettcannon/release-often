@@ -130,4 +130,3 @@ Finally, when everything is live, create a release on GitHub to both tag the rel
 
 #### TODO
 - [Upload release artifacts](https://developer.github.com/v3/repos/releases/#upload-a-release-asset)
-- Customization of the release name?
