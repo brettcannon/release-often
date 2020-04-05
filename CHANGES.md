@@ -1,3 +1,6 @@
+# 0.4.1
+[PR #20](https://github.com/brettcannon/release-often/pull/20): Index off the pull request event appropriately (thanks [brettcannon](https://github.com/brettcannon))
+
 # 0.4.0
 [PR #19](https://github.com/brettcannon/release-often/pull/19): Create release after uploading (thanks [brettcannon](https://github.com/brettcannon))
 
