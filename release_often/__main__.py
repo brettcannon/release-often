@@ -95,7 +95,7 @@ def upload(output_dir, pypi_token):
 
 
 async def make_release(releases_url, version, changelog_entry, oauth_token):
-    async with gidgethub.httpx.AsyncClient() as client:
+    async with httpx.AsyncClient() as client:
         gh = gidgethub.httpx.GitHubAPI(
             client, "brettcannon/release_often", oauth_token=oauth_token
         )
