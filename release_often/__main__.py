@@ -55,6 +55,7 @@ def update_changelog(path, new_version):
     new_entry = changelog.entry(path.suffix, new_version, gidgethub.actions.event())
     current_changelog = path.read_text(encoding="utf-8")
     path.write_text(new_entry + current_changelog, encoding="utf-8")
+    return new_entry
 
 
 def build():
