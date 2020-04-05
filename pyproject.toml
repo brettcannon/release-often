@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "release_often"
-version = "0.4.3"
+version = "0.4.4"
 description = "GitHub Action for releasing a Python project to PyPI after every relevant, merged PR"
 authors = ["Brett Cannon <brett@python.org>"]
 license = "MIT"

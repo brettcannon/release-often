@@ -1,3 +1,6 @@
+# 0.4.4
+[PR #23](https://github.com/brettcannon/release-often/pull/23): Return the created changelog entry (thanks [brettcannon](https://github.com/brettcannon))
+
 # 0.4.3
 [PR #22](https://github.com/brettcannon/release-often/pull/22): Fix an httpx reference (thanks [brettcannon](https://github.com/brettcannon))
 
