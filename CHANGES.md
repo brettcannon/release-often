@@ -1,3 +1,6 @@
+# 0.4.0
+[PR #19](https://github.com/brettcannon/release-often/pull/19): Create release after uploading (thanks [brettcannon](https://github.com/brettcannon))
+
 # 0.3.0
 [PR #18](https://github.com/brettcannon/release-often/pull/18): Support uploading to PyPI (thanks [brettcannon](https://github.com/brettcannon))
 
