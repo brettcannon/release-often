@@ -94,7 +94,7 @@ def upload(output_dir, pypi_token):
     )
 
 
-async def make_release(releases_url, version, changelog_entry, *, oauth_token):
+async def make_release(releases_url, version, changelog_entry, oauth_token):
     async with gidgethub.httpx.AsyncClient() as client:
         gh = gidgethub.httpx.GitHubAPI(
             client, "brettcannon/release_often", oauth_token=oauth_token
@@ -102,12 +102,10 @@ async def make_release(releases_url, version, changelog_entry, *, oauth_token):
         return await release.create(gh, releases_url, version, changelog_entry)
 
 
-def create_release(version, changelog_entry, *, oauth_token):
+def create_release(version, changelog_entry, oauth_token):
     event = gidgethub.actions.event()
     releases_url = event["repository"]["releases_url"]
-    return trio.run(
-        make_release, releases_url, version, changelog_entry, oauth_token=oauth_token
-    )
+    return trio.run(make_release, releases_url, version, changelog_entry, oauth_token)
 
 
 if __name__ == "__main__":
@@ -125,6 +123,4 @@ if __name__ == "__main__":
         gidgethub.actions.command(
             "debug", "PyPI uploading skipped; no API token provided"
         )
-    upload_url = create_release(
-        new_version, changelog_entry, oauth_token=args.github_token
-    )
+    upload_url = create_release(new_version, changelog_entry, args.github_token)
