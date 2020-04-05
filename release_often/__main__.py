@@ -104,7 +104,7 @@ async def make_release(releases_url, version, changelog_entry, *, oauth_token):
 
 def create_release(version, changelog_entry, *, oauth_token):
     event = gidgethub.actions.event()
-    releases_url = event["pull_request"]["repository"]["releases_url"]
+    releases_url = event["repository"]["releases_url"]
     return trio.run(
         make_release, releases_url, version, changelog_entry, oauth_token=oauth_token
     )
