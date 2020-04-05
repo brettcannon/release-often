@@ -1,3 +1,6 @@
+# 0.4.2
+[PR #21](https://github.com/brettcannon/release-often/pull/21): trio.run() does not accept keyword-only arguments (thanks [brettcannon](https://github.com/brettcannon))
+
 # 0.4.1
 [PR #20](https://github.com/brettcannon/release-often/pull/20): Index off the pull request event appropriately (thanks [brettcannon](https://github.com/brettcannon))
 
