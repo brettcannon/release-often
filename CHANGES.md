@@ -1,3 +1,6 @@
+# 0.4.5
+[PR #24](https://github.com/brettcannon/release-often/pull/24): Use ADD properly to copy source files into the container (thanks [brettcannon](https://github.com/brettcannon))
+
 # 0.4.4
 [PR #23](https://github.com/brettcannon/release-often/pull/23): Return the created changelog entry (thanks [brettcannon](https://github.com/brettcannon))
 
