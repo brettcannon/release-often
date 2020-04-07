@@ -11,6 +11,7 @@ RUN apt-get -qy update && apt-get -qy install git && \
     rm -rf /var/cache/apt/* /var/lib/apt/lists/*
 
 WORKDIR /app
+ENV PYTHONPATH "/app:${PYTHONPATH}"
 
 COPY pyproject.toml .
 COPY poetry.lock .
