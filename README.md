@@ -92,11 +92,11 @@ Leaving this input out will disable uploading to PyPI.
 ### Update version
 Based on which of the following labels are applied to a PR, update the version number:
 
-- `impact:breaking` to bump the major version
-- `impact:feature` to bump the minor version
-- `impact:bugfix` to bump the micro version
-- `impact:post-release` to bump the `post` version
-- `impact:project` to make no change
+- `impact-breaking` to bump the major version
+- `impact-feature` to bump the minor version
+- `impact-bugfix` to bump the micro version
+- `impact-post-release` to add/bump the `post` version
+- `impact-project` to make no change
 
 Supported build tools:
 - [Poetry](https://pypi.org/project/poetry/)
@@ -127,6 +127,3 @@ Input:
 
 ### Create a release on GitHub
 Finally, when everything is live, create a release on GitHub to both tag the release in the repository and store the artifacts uploaded to PyPI. The name of the release is the version prepended by `v` and the body of the release is the changelog entry.
-
-#### TODO
-- [Upload release artifacts](https://developer.github.com/v3/repos/releases/#upload-a-release-asset)

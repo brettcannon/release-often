@@ -41,9 +41,13 @@ def update_version():
     gidgethub.actions.command("debug", f"Current/old version is {current_version}")
     new_version = version.bump_by_label(gidgethub.actions.event(), current_version)
     gidgethub.actions.command("debug", f"New version is {new_version}")
-    new_contents = build_tool.change_version(
-        file_contents, current_version, new_version
-    )
+    try:
+        new_contents = build_tool.change_version(
+            file_contents, current_version, new_version
+        )
+    except ValueError as exc:
+        # Bump label is missing.
+        error(str(exc))
     version_file.write_text(new_contents, encoding="utf-8")
     return new_version
 
@@ -95,18 +99,10 @@ def upload(output_dir, pypi_token):
     )
 
 
-async def make_release(releases_url, version, changelog_entry, oauth_token):
-    async with httpx.AsyncClient() as client:
-        gh = gidgethub.httpx.GitHubAPI(
-            client, "brettcannon/release_often", oauth_token=oauth_token
-        )
-        return await release.create(gh, releases_url, version, changelog_entry)
-
-
-def create_release(version, changelog_entry, oauth_token):
+async def create_release(gh, version, changelog_entry):
     event = gidgethub.actions.event()
     releases_url = event["repository"]["releases_url"]
-    return trio.run(make_release, releases_url, version, changelog_entry, oauth_token)
+    return await release.create(gh, releases_url, version, changelog_entry)
 
 
 if __name__ == "__main__":
@@ -124,4 +120,8 @@ if __name__ == "__main__":
         gidgethub.actions.command(
             "debug", "PyPI uploading skipped; no API token provided"
         )
-    upload_url = create_release(new_version, changelog_entry, args.github_token)
+    async with httpx.AsyncClient() as client:
+        gh = gidgethub.httpx.GitHubAPI(
+            client, "brettcannon/release_often", oauth_token=args.github_token
+        )
+        trio.run(create_release, gh, new_version, changelog_entry)

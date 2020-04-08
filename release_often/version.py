@@ -5,13 +5,16 @@ import packaging.version
 from . import flit, poetry
 
 
+LABEL_PREFIX = "impact-"
+
+
 @enum.unique
 class BumpLevel(enum.Enum):
-    major = "impact:breaking"
-    minor = "impact:feature"
-    micro = "impact:bugfix"
-    post = "impact:post-release"
-    internal = "impact:project"
+    major = f"{LABEL_PREFIX}breaking"
+    minor = f"{LABEL_PREFIX}feature"
+    micro = f"{LABEL_PREFIX}bugfix"
+    post = f"{LABEL_PREFIX}release"
+    internal = f"{LABEL_PREFIX}project"
 
 
 def bump(version, bump_by):
@@ -57,4 +60,4 @@ def bump_by_label(event, old_version):
         else:
             return bump(old_version, level)
     else:
-        raise ValueError("'impact' label missing")
+        raise ValueError(f"{LABEL_PREFIX!r} label missing")

@@ -48,7 +48,7 @@
                 "name": "skip news"
             },
             {
-                "name": "impact:breaking"
+                "name": "impact-breaking"
             }
         ],
         "milestone": null,
