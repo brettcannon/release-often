@@ -16,7 +16,7 @@ from . import version
 
 
 def error(message):
-    actions.actions.command("error", message)
+    gidgethub.actions.command("error", message)
     sys.exit(1)
 
 
