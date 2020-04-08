@@ -105,7 +105,7 @@ async def create_release(gh, version, changelog_entry):
     return await release.create(gh, releases_url, version, changelog_entry)
 
 
-if __name__ == "__main__":
+async def main():
     args = parse_args()
     new_version = update_version()
     if new_version is None:
@@ -124,4 +124,8 @@ if __name__ == "__main__":
         gh = gidgethub.httpx.GitHubAPI(
             client, "brettcannon/release_often", oauth_token=args.github_token
         )
-        trio.run(create_release, gh, new_version, changelog_entry)
+        await create_release(gh, new_version, changelog_entry)
+
+
+if __name__ == "__main__":
+    trio.run(main)
