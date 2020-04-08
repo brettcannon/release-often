@@ -1,3 +1,6 @@
+# 0.4.7
+[PR #27](https://github.com/brettcannon/release-often/pull/27): Fix a name (thanks [brettcannon](https://github.com/brettcannon))
+
 # 0.4.6
 Set `PYTHONPATH` in the container
 
