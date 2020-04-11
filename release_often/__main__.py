@@ -93,7 +93,8 @@ def commit(new_version):
 
 
 def upload(output_dir, pypi_token):
-    env = {"TWINE_USERNAME": "__token__", "TWINE_PASSWORD": pypi_token}
+    env = os.environ.copy()
+    env.update({"TWINE_USERNAME": "__token__", "TWINE_PASSWORD": pypi_token})
     subprocess.run(
         ["twine", "upload", "--non-interactive", f"{output_dir}/*"], check=True, env=env
     )
