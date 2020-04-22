@@ -65,7 +65,7 @@ jobs:
 
     - uses: brettcannon/release-often@v1
       with:
-        changelog-path: doc/CHANGELOG.rst
+        changelog-path: doc/CHANGELOG.rst  # XXX Update as appropriate!
         pypi-token: ${{ secrets.PYPI_TOKEN }}
         github-token: ${{ secrets.GITHUB_TOKEN }}
 ```
