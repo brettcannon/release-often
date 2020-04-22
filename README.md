@@ -67,7 +67,7 @@ jobs:
       with:
         changelog-path: doc/CHANGELOG.rst
         pypi-token: ${{ secrets.PYPI_TOKEN }}
-        github-token: ${{ secret.GITHUB_TOKEN }}
+        github-token: ${{ secrets.GITHUB_TOKEN }}
 ```
 
 ### Inputs
