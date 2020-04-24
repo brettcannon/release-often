@@ -1,20 +1,31 @@
-MD = """# {version}
+MD_HEADER = """\
+# Changelog
+"""
+
+MD_ENTRY = """\
+## {version}
 [PR #{pr_number}]({pr_url}): {summary} (thanks [{committer}]({committer_url}))
-
 """
 
-RST = """{version}
-=====================================================================
+RST_HEADER = """\
+Changelog
+=========
+"""
+
+RST_ENTRY = """\
+{version}
+-------------------------------------------------
 `PR #{pr_number} <{pr_url}>`_: {summary} (thanks `{committer} <{committer_url}>`_)
-
 """
 
-TEMPLATES = {".md": MD, ".rst": RST}
+TEMPLATES = {".md": (MD_HEADER, MD_ENTRY), ".rst": (RST_HEADER, RST_ENTRY)}
 
 
-def entry(path_extension, version, pr_event):
-    """Create a changelog entry based on the log's file extension and PR webhook event."""
-    template = TEMPLATES[path_extension.lower()]
+def update(current_changelog, path_extension, version, pr_event):
+    """Update the changelog based on a merged pull request."""
+    header, entry_template = TEMPLATES[path_extension.lower()]
+    if current_changelog.strip() and not current_changelog.startswith(header):
+        raise ValueError("Changelog has a non-standard header")
     pull_request = pr_event["pull_request"]
     details = {
         "version": version,
@@ -24,4 +35,7 @@ def entry(path_extension, version, pr_event):
         "committer": pull_request["user"]["login"],
         "committer_url": pull_request["user"]["html_url"],
     }
-    return template.format_map(details)
+    entry = entry_template.format_map(details)
+    changelog_no_header = current_changelog[len(header) :]
+    changelog = f"{header.strip()}\n\n{entry.strip()}\n\n{changelog_no_header.strip()}"
+    return f"{changelog.strip()}\n"  # Guarantee a single trailing newline.

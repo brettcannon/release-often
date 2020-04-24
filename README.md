@@ -79,6 +79,8 @@ jobs:
 
 Leaving this input out will disable automatic changelog updating.
 
+The changelog file is expected to either be empty or have the appropriate header.
+
 #### `pypi-token`
 The [PyPI API token](https://pypi.org/help/#apitoken) for this project. It is **strongly** suggested that you create a token scoped to _just_ this project.
 
