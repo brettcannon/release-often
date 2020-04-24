@@ -1,5 +1,8 @@
 # Changelog
 
+## 0.6.0
+[PR #30](https://github.com/brettcannon/release-often/pull/30): Support a header in the changelog (thanks [brettcannon](https://github.com/brettcannon))
+
 ## 0.5.0
 [PR #29](https://github.com/brettcannon/release-often/pull/29): Make main() async (thanks [brettcannon](https://github.com/brettcannon))
 
@@ -32,4 +35,3 @@ Set `PYTHONPATH` in the container
 
 ## 0.2.0
 [PR #17](https://github.com/brettcannon/release-often/pull/17): Run 'git push' (thanks [brettcannon](https://github.com/brettcannon))
-
