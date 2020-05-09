@@ -1,5 +1,8 @@
 # Changelog
 
+## 0.6.1
+[PR #31](https://github.com/brettcannon/release-often/pull/31): Make reST changelog entry use anonymous links (thanks [brettcannon](https://github.com/brettcannon))
+
 ## 0.6.0
 [PR #30](https://github.com/brettcannon/release-often/pull/30): Support a header in the changelog (thanks [brettcannon](https://github.com/brettcannon))
 
