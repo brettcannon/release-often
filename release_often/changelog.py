@@ -15,7 +15,7 @@ Changelog
 RST_ENTRY = """\
 {version}
 -------------------------------------------------
-`PR #{pr_number} <{pr_url}>`_: {summary} (thanks `{committer} <{committer_url}>`_)
+`PR #{pr_number} <{pr_url}>`__: {summary} (thanks `{committer} <{committer_url}>`__)
 """
 
 TEMPLATES = {".md": (MD_HEADER, MD_ENTRY), ".rst": (RST_HEADER, RST_ENTRY)}

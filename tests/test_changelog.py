@@ -9,7 +9,7 @@ Changelog
 
 1.0.0
 -------------------------------------------------
-`PR #1 <...>`_: I did something! (thanks `Brett <...>`_)
+`PR #1 <...>`__: I did something! (thanks `Brett <...>`__)
 """
 
 NEW_RST_CHANGELOG = """\
@@ -18,11 +18,11 @@ Changelog
 
 2.0.0
 -------------------------------------------------
-`PR #105 <https://github.com/brettcannon/gidgethub/pull/105>`_: Update the copyright year in documentation. (thanks `Mariatta <https://github.com/Mariatta>`_)
+`PR #105 <https://github.com/brettcannon/gidgethub/pull/105>`__: Update the copyright year in documentation. (thanks `Mariatta <https://github.com/Mariatta>`__)
 
 1.0.0
 -------------------------------------------------
-`PR #1 <...>`_: I did something! (thanks `Brett <...>`_)
+`PR #1 <...>`__: I did something! (thanks `Brett <...>`__)
 """
 
 OLD_MD_CHANGELOG = """\
