@@ -80,7 +80,6 @@ version = "2019.11.28"
 [[package]]
 category = "main"
 description = "Foreign Function Interface for Python calling C code."
-marker = "sys_platform == \"linux\" or os_name == \"nt\""
 name = "cffi"
 optional = false
 python-versions = "*"
@@ -369,7 +368,7 @@ version = "1.8.1"
 [[package]]
 category = "main"
 description = "C parser in Python"
-marker = "os_name == \"nt\" and sys_platform == \"linux\" or sys_platform == \"linux\" or os_name == \"nt\""
+marker = "sys_platform == \"linux\" or os_name == \"nt\" or sys_platform == \"linux\" and os_name == \"nt\""
 name = "pycparser"
 optional = false
 python-versions = ">=2.7, !=3.0.*, !=3.1.*, !=3.2.*, !=3.3.*"
@@ -410,7 +409,7 @@ description = "pytest: simple powerful testing with Python"
 name = "pytest"
 optional = false
 python-versions = ">=3.5"
-version = "5.4.1"
+version = "5.4.2"
 
 [package.dependencies]
 atomicwrites = ">=1.0"
@@ -652,7 +651,7 @@ python-versions = "*"
 version = "0.5.1"
 
 [metadata]
-content-hash = "5bf1e6c55f9f420efff02045c3dabe06edb7ee2812e5313bf6780ecc153e56a6"
+content-hash = "e41a26a07ef1465cc97aa2d0ab2d01e29cdcf6cac317727e654765b4255a66c9"
 python-versions = "^3.8"
 
 [metadata.files]
@@ -860,8 +859,8 @@ pyparsing = [
     {file = "pyparsing-2.4.6.tar.gz", hash = "sha256:4c830582a84fb022400b85429791bc551f1f4871c33f23e44f353119e92f969f"},
 ]
 pytest = [
-    {file = "pytest-5.4.1-py3-none-any.whl", hash = "sha256:0e5b30f5cb04e887b91b1ee519fa3d89049595f428c1db76e73bd7f17b09b172"},
-    {file = "pytest-5.4.1.tar.gz", hash = "sha256:84dde37075b8805f3d1f392cc47e38a0e59518fb46a431cfdaf7cf1ce805f970"},
+    {file = "pytest-5.4.2-py3-none-any.whl", hash = "sha256:95c710d0a72d91c13fae35dce195633c929c3792f54125919847fdcdf7caa0d3"},
+    {file = "pytest-5.4.2.tar.gz", hash = "sha256:eb2b5e935f6a019317e455b6da83dd8650ac9ffd2ee73a7b657a30873d67a698"},
 ]
 pywin32-ctypes = [
     {file = "pywin32-ctypes-0.2.0.tar.gz", hash = "sha256:24ffc3b341d457d48e8922352130cf2644024a4ff09762a2261fd34c36ee5942"},
