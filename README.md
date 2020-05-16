@@ -14,41 +14,38 @@ Do note that this action is not designed to work for all projects. This action i
 6. Create a release on GitHub
 
 ## Caveats
-Due to the fact that the action commits back to the repository you cannot have required status checks on PRs as that prevents direct commits from non-admins.
+Due to the fact that this action commits back to the repository, you cannot have srequired status checks on PRs as that prevents direct commits from non-admins.
 
 ## Action instructions
 ### Configuration example
 ```YAML
+name: Release
+
 on:
   push:
-    branches: [ master ]
-  pull_request:
-    types: [opened, synchronize, reopened, closed]
+    branches:
+      - master
 
 jobs:
   test:
-    if: github.event.action != 'closed' || github.event.pull_request.merged
-
     runs-on: ubuntu-latest
 
     steps:
     - uses: actions/checkout@v2
 
-    - uses: actions/setup-python@v1
+    - uses: actions/setup-python@v2
       with:
         python-version: '3.8'
 
     # ... more steps for testing.
 
   lint:
-    if: github.event.action != 'closed' || github.event.pull_request.merged
-
     runs-on: ubuntu-latest
 
     steps:
     - uses: actions/checkout@v2
 
-    - uses: actions/setup-python@v1
+    - uses: actions/setup-python@v2
       with:
         python-version: '3.8'
 
@@ -56,7 +53,6 @@ jobs:
 
   release:
     needs: [test, lint]
-    if: github.event_name == 'pull_request' && github.ref == 'master' && github.event.action == 'closed' && github.event.pull_request.merged
 
     runs-on: ubuntu-latest
 

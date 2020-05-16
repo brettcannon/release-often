@@ -49,9 +49,9 @@ def find_details(directory):
         return None, None
 
 
-def bump_by_label(event, old_version):
+def bump_by_label(pr_event, old_version):
     """Calculate the new version based on the pull request event."""
-    for label in event["pull_request"]["labels"]:
+    for label in pr_event["labels"]:
         label_name = label["name"]
         try:
             level = BumpLevel(label_name)

@@ -18,7 +18,7 @@ Changelog
 
 2.0.0
 -------------------------------------------------
-`PR #105 <https://github.com/brettcannon/gidgethub/pull/105>`__: Update the copyright year in documentation. (thanks `Mariatta <https://github.com/Mariatta>`__)
+`PR #108 <https://github.com/brettcannon/gidgethub/pull/108>`__: Adding utility functions for GitHub App (thanks `Mariatta <https://github.com/Mariatta>`__)
 
 1.0.0
 -------------------------------------------------
@@ -37,7 +37,7 @@ NEW_MD_CHANGELOG = """\
 # Changelog
 
 ## 2.0.0
-[PR #105](https://github.com/brettcannon/gidgethub/pull/105): Update the copyright year in documentation. (thanks [Mariatta](https://github.com/Mariatta))
+[PR #108](https://github.com/brettcannon/gidgethub/pull/108): Adding utility functions for GitHub App (thanks [Mariatta](https://github.com/Mariatta))
 
 ## 1.0.0
 -------------------------------------------------
@@ -66,7 +66,7 @@ SINGLE_ENTRY = """\
 # Changelog
 
 ## 2.0.0
-[PR #105](https://github.com/brettcannon/gidgethub/pull/105): Update the copyright year in documentation. (thanks [Mariatta](https://github.com/Mariatta))
+[PR #108](https://github.com/brettcannon/gidgethub/pull/108): Adding utility functions for GitHub App (thanks [Mariatta](https://github.com/Mariatta))
 """
 
 

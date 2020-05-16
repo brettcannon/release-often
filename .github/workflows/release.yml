@@ -1,21 +1,18 @@
-# This is a basic workflow to help you get started with Actions
-
-name: CI
+name: Release
 
 on:
-  pull_request:
-    types: [opened, synchronize, reopened, closed]
+  push:
+    branches:
+      - master
 
 jobs:
   test:
-    if: github.event.action != 'closed' || github.event.pull_request.merged
-
     runs-on: ubuntu-latest
 
     steps:
     - uses: actions/checkout@v2
 
-    - uses: actions/setup-python@v1
+    - uses: actions/setup-python@v2
       with:
         python-version: '3.8'
 
@@ -35,7 +32,6 @@ jobs:
 
   release:
     needs: [test]
-    if: github.event_name == 'pull_request' && github.ref == 'master' && github.event.action == 'closed' && github.event.pull_request.merged
 
     runs-on: ubuntu-latest
 

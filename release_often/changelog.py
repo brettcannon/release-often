@@ -26,14 +26,13 @@ def update(current_changelog, path_extension, version, pr_event):
     header, entry_template = TEMPLATES[path_extension.lower()]
     if current_changelog.strip() and not current_changelog.startswith(header):
         raise ValueError("Changelog has a non-standard header")
-    pull_request = pr_event["pull_request"]
     details = {
         "version": version,
-        "pr_number": pull_request["number"],
-        "pr_url": pull_request["html_url"],
-        "summary": pull_request["title"],
-        "committer": pull_request["user"]["login"],
-        "committer_url": pull_request["user"]["html_url"],
+        "pr_number": pr_event["number"],
+        "pr_url": pr_event["html_url"],
+        "summary": pr_event["title"],
+        "committer": pr_event["user"]["login"],
+        "committer_url": pr_event["user"]["html_url"],
     }
     entry = entry_template.format_map(details)
     changelog_no_header = current_changelog[len(header) :]

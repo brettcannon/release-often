@@ -1,0 +1,27 @@
+name: CI
+
+on: pull_request
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v2
+
+    - uses: actions/setup-python@v2
+      with:
+        python-version: '3.8'
+
+    - name: 'Install Poetry'
+      run: |
+        python -m pip install poetry
+        poetry config virtualenvs.create false
+
+    - run: poetry install
+
+    - run: pytest tests
+
+    - run: mypy --ignore-missing-imports release_often/
+
+    - run: black --check .

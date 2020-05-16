@@ -1,6 +1,7 @@
 import argparse
 import os
 import pathlib
+import re
 import subprocess
 import sys
 
@@ -13,6 +14,9 @@ import trio
 from . import changelog
 from . import release
 from . import version
+
+
+PR_NUM = re.compile(r"\(#(?P<number>\d+)\)")
 
 
 def error(message):
@@ -28,7 +32,16 @@ def parse_args():
     return parser.parse_args()
 
 
-def update_version():
+async def matching_pr(gh, push_event):
+    pr_number_match = PR_NUM.search(push_event["commits"][0]["message"])
+    if not pr_number_match:
+        return None
+    pr_number = pr_number_match.group("number")
+    pr_url_template = push_event["repository"]["pulls_url"]
+    return await gh.getitem(pr_url_template, {"number": pr_number})
+
+
+def update_version(pr_event):
     build_tool, version_file = version.find_details(gidgethub.actions.workspace())
     if build_tool is None:
         error("build tool not detected; unable to update version")
@@ -39,7 +52,7 @@ def update_version():
     file_contents = version_file.read_text(encoding="utf-8")
     current_version = build_tool.read_version(file_contents)
     gidgethub.actions.command("debug", f"Current/old version is {current_version}")
-    new_version = version.bump_by_label(gidgethub.actions.event(), current_version)
+    new_version = version.bump_by_label(pr_event, current_version)
     gidgethub.actions.command("debug", f"New version is {new_version}")
     try:
         new_contents = build_tool.change_version(
@@ -52,13 +65,14 @@ def update_version():
     return new_version
 
 
-def update_changelog(path, new_version):
+def update_changelog(path, new_version, pr_event):
     if not path.exists():
         error(f"The path to the changelog does not exist: {path}")
     gidgethub.actions.command("debug", f"Changelog file path is {path}")
     current_changelog = path.read_text(encoding="utf-8")
-    event = gidgethub.actions.event()
-    new_changelog = changelog.update(current_changelog, path.suffix, new_version, event)
+    new_changelog = changelog.update(
+        current_changelog, path.suffix, new_version, pr_event
+    )
     path.write_text(new_changelog, encoding="utf-8")
     return event["pull_request"]["title"]
 
@@ -109,23 +123,33 @@ async def create_release(gh, version, changelog_entry):
 
 async def main():
     args = parse_args()
-    new_version = update_version()
-    if new_version is None:
-        gidgethub.actions.command("debug", "No version update requested")
-        sys.exit()
-    changelog_entry = update_changelog(pathlib.Path(args.changelog_path), new_version)
-    output_dir = build()
-    commit(new_version)
-    if args.pypi_token != "-":
-        upload(output_dir, args.pypi_token)
-    else:
-        gidgethub.actions.command(
-            "debug", "PyPI uploading skipped; no API token provided"
-        )
     async with httpx.AsyncClient() as client:
         gh = gidgethub.httpx.GitHubAPI(
             client, "brettcannon/release_often", oauth_token=args.github_token
         )
+
+        push_event = gidgethub.actions.event()
+        pr_event = await matching_pr(gh, push_event)
+        if not pr_event:
+            gidgethub.actions.command(
+                "debug", "No pull request number found in first commit's title"
+            )
+            sys.exit()
+        new_version = update_version(pr_event)
+        if new_version is None:
+            gidgethub.actions.command("debug", "No version update requested")
+            sys.exit()
+        changelog_entry = update_changelog(
+            pathlib.Path(args.changelog_path), new_version, pr_event
+        )
+        output_dir = build()
+        commit(new_version)
+        if args.pypi_token != "-":
+            upload(output_dir, args.pypi_token)
+        else:
+            gidgethub.actions.command(
+                "debug", "PyPI uploading skipped; no API token provided"
+            )
         await create_release(gh, new_version, changelog_entry)
 
 
