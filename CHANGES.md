@@ -1,5 +1,8 @@
 # Changelog
 
+## 0.6.2
+[PR #37](https://github.com/brettcannon/release-often/pull/37): Fix a naming bug (thanks [brettcannon](https://github.com/brettcannon))
+
 Work from a push event instead of a pull request event.
 
 ## 0.6.1
