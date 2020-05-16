@@ -3,7 +3,6 @@ import json
 import trio
 
 from release_often import release
-from . import data
 
 
 class MockGitHubAPI:

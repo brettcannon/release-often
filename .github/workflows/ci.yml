@@ -20,8 +20,10 @@ jobs:
 
     - run: poetry install
 
-    - run: pytest tests
+    - run: flake8
 
     - run: mypy --ignore-missing-imports release_often/
+
+    - run: pytest tests
 
     - run: black --check .

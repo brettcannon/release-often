@@ -1,5 +1,3 @@
-import pathlib
-
 import pytest
 
 from release_often import flit

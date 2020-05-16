@@ -74,7 +74,7 @@ def update_changelog(path, new_version, pr_event):
         current_changelog, path.suffix, new_version, pr_event
     )
     path.write_text(new_changelog, encoding="utf-8")
-    return event["pull_request"]["title"]
+    return pr_event["title"]
 
 
 def build():

@@ -1,5 +1,7 @@
 # Changelog
 
+Work from a push event instead of a pull request event.
+
 ## 0.6.1
 [PR #31](https://github.com/brettcannon/release-often/pull/31): Make reST changelog entry use anonymous links (thanks [brettcannon](https://github.com/brettcannon))
 
