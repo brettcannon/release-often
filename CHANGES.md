@@ -1,5 +1,8 @@
 # Changelog
 
+## 0.6.3
+[PR #38](https://github.com/brettcannon/release-often/pull/38): Bump trio from 0.14.0 to 0.15.0 (thanks [dependabot-preview[bot]](https://github.com/apps/dependabot-preview))
+
 ## 0.6.2
 [PR #37](https://github.com/brettcannon/release-often/pull/37): Fix a naming bug (thanks [brettcannon](https://github.com/brettcannon))
 
