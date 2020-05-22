@@ -631,7 +631,7 @@ description = "A friendly Python library for async concurrency and I/O"
 name = "trio"
 optional = false
 python-versions = ">=3.6"
-version = "0.15.0"
+version = "0.15.1"
 
 [package.dependencies]
 async-generator = ">=1.9"
@@ -713,7 +713,7 @@ python-versions = "*"
 version = "0.5.1"
 
 [metadata]
-content-hash = "d87fd92779a7ad9644ef049c107ae34ad875ebb7d1f3e8bacbd0b16416e91e87"
+content-hash = "4431f51d41f2b9c491f5272765d4078f57f79356fb55739a70800b90575cb6c0"
 python-versions = "^3.8"
 
 [metadata.files]
@@ -1019,8 +1019,8 @@ tqdm = [
     {file = "tqdm-4.46.0.tar.gz", hash = "sha256:4733c4a10d0f2a4d098d801464bdaf5240c7dadd2a7fde4ee93b0a0efd9fb25e"},
 ]
 trio = [
-    {file = "trio-0.15.0-py3-none-any.whl", hash = "sha256:894d6e9a517299f354cb8d520748fec53ae1f34b7355445b3451c48cb665d367"},
-    {file = "trio-0.15.0.tar.gz", hash = "sha256:23b8e3b8e27202792c03ec716079b6b517e53ad68ee9864aa911378842f22e95"},
+    {file = "trio-0.15.1-py3-none-any.whl", hash = "sha256:992763e99c2c37df0796a2ce8c6f498a91df68570cfa3a63acf8367263903ce7"},
+    {file = "trio-0.15.1.tar.gz", hash = "sha256:3010864ab8d8b2ae44d3bc97b0e8924d8f5170bf32f07c7638a930a129687f33"},
 ]
 twine = [
     {file = "twine-3.1.1-py3-none-any.whl", hash = "sha256:c1af8ca391e43b0a06bbc155f7f67db0bf0d19d284bfc88d1675da497a946124"},
