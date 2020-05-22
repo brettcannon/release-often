@@ -52,7 +52,11 @@ def update_version(pr_event):
     file_contents = version_file.read_text(encoding="utf-8")
     current_version = build_tool.read_version(file_contents)
     gidgethub.actions.command("debug", f"Current/old version is {current_version}")
-    new_version = version.bump_by_label(pr_event, current_version)
+    try:
+        new_version = version.bump_by_label(pr_event, current_version)
+    except ValueError as exc:
+        gidgethub.actions.command("debug", str(ValueError))
+        return None
     gidgethub.actions.command("debug", f"New version is {new_version}")
     try:
         new_contents = build_tool.change_version(
