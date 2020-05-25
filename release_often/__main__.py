@@ -55,7 +55,7 @@ def update_version(pr_event):
     try:
         new_version = version.bump_by_label(pr_event, current_version)
     except ValueError as exc:
-        gidgethub.actions.command("debug", str(ValueError))
+        gidgethub.actions.command("debug", str(exc))
         return None
     gidgethub.actions.command("debug", f"New version is {new_version}")
     try:
