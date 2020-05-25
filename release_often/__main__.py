@@ -57,6 +57,9 @@ def update_version(pr_event):
     except ValueError as exc:
         gidgethub.actions.command("debug", str(exc))
         return None
+    else:
+        if not new_version:
+            return None
     gidgethub.actions.command("debug", f"New version is {new_version}")
     try:
         new_contents = build_tool.change_version(
