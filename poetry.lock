@@ -160,16 +160,18 @@ description = "An async GitHub API library"
 name = "gidgethub"
 optional = false
 python-versions = ">=3.6"
-version = "4.1.0"
+version = "4.1.1"
 
 [package.dependencies]
-PyJWT = ">=1.7.1"
-cryptography = ">=2.9"
 uritemplate = ">=3.0.1"
+
+[package.dependencies.PyJWT]
+extras = ["crypto"]
+version = "*"
 
 [package.extras]
 aiohttp = ["aiohttp"]
-dev = ["aiohttp", "black", "coverage (>=5.0.3)", "httpx", "mypy", "pytest-cov", "tornado"]
+dev = ["aiohttp", "black", "coverage (>=5.0.3)", "httpx", "mypy", "pytest-cov", "pytest-xdist", "tornado"]
 doc = ["sphinx"]
 httpx = ["httpx (>=0.11.0)"]
 test = ["importlib-resources", "pytest (>=5.4.1)", "pytest-asyncio", "pytest-tornasync"]
@@ -437,6 +439,11 @@ name = "pyjwt"
 optional = false
 python-versions = "*"
 version = "1.7.1"
+
+[package.dependencies]
+[package.dependencies.cryptography]
+optional = true
+version = ">=1.4"
 
 [package.extras]
 crypto = ["cryptography (>=1.4)"]
@@ -817,8 +824,8 @@ flake8 = [
     {file = "flake8-3.8.2.tar.gz", hash = "sha256:c69ac1668e434d37a2d2880b3ca9aafd54b3a10a3ac1ab101d22f29e29cf8634"},
 ]
 gidgethub = [
-    {file = "gidgethub-4.1.0-py3-none-any.whl", hash = "sha256:f87910ddf17147c6c9f644848d6584680202f816b2dd7113cab6269369051aea"},
-    {file = "gidgethub-4.1.0.tar.gz", hash = "sha256:95674e830110e9d9a0d01ee51a5d74fa28cffa4ba62376ab8b7f2303cfb5369b"},
+    {file = "gidgethub-4.1.1-py3-none-any.whl", hash = "sha256:fab527a36fd89a27f68686f4c726b2efd989c3d2cac1c46149b1dd46c4e3ab7d"},
+    {file = "gidgethub-4.1.1.tar.gz", hash = "sha256:cfabfa696d422ee91eaf1e3f01ea75e576721233cc3ea8badc7d86c30061df8e"},
 ]
 h11 = [
     {file = "h11-0.9.0-py2.py3-none-any.whl", hash = "sha256:4bc6d6a1238b7615b266ada57e0618568066f57dd6fa967d1290ec9309b2f2f1"},
